@@ -47,13 +47,10 @@ describe('login', () => {
     });
 
     fit('unknown user can\'t log in', () => {
-        return modal.login('foo', 'bar')
-            .then(() => {
-                browser.ignoreSynchronization = false;
-                expect(modal.btn.isDisplayed()).toBe(true);
-                expect(browser.getCurrentUrl()).not.toBe(browser.baseUrl + '/#/liveblog');
-                expect(modal.error.isDisplayed()).toBe(true);
-            });
+        modal.login('foo', 'bar');
+        expect(modal.btn.isDisplayed()).toBe(true);
+        expect(browser.getCurrentUrl()).not.toBe(browser.baseUrl + '/#/liveblog');
+        browser.wait(() => modal.error.isDisplayed(), 5000);
     });
 });
 
