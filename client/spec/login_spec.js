@@ -49,9 +49,8 @@ describe('login', () => {
     fit('unknown user can\'t log in', () => {
         modal.login('foo', 'bar');
         expect(modal.btn.isDisplayed()).toBe(true);
-        return;
         expect(browser.getCurrentUrl()).not.toBe(browser.baseUrl + '/#/liveblog');
-        expect(modal.error.isDisplayed()).toBe(true);
+        browser.wait(() => modal.error.isDisplayed(), 2000);
     });
 });
 
