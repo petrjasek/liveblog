@@ -220,7 +220,9 @@ vm.init = function() {
   setInterval(() => {
     vm.loadPosts({fromDate: latestUpdate})
       .then(view.renderPosts)
-      .then(view.adsManager.refreshAds);
+      .then((resp) => {
+        if (resp && resp._items.length > 0) view.adsManager.refreshAds();
+      });
   }, 10*1000);
 
   //return this.vm.latestUpdate;
